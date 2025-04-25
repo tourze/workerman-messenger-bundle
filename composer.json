@@ -11,6 +11,7 @@
     "symfony/dependency-injection": "^6.4",
     "symfony/http-kernel": "^6.4",
     "symfony/framework-bundle": "^6.4",
+    "symfony/yaml": "^6.4 || ^7.1",
     "workerman/workerman": "^5.1"
   },
   "autoload": {
@@ -27,8 +28,5 @@
     "phpstan/phpstan": "^2.1",
     "phpunit/phpunit": "^10.0",
     "maglnet/composer-require-checker": "^4"
-  },
-  "scripts": {
-    "phpstan": "phpstan analyse src -l 1"
   }
 }
