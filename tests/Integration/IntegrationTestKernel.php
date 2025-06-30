@@ -9,6 +9,9 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
 use Tourze\WorkermanMessengerBundle\WorkermanMessengerBundle;
 
+/**
+ * @internal
+ */
 class IntegrationTestKernel extends Kernel
 {
     use MicroKernelTrait;
