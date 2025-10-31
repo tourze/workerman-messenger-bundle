@@ -10,17 +10,17 @@ use Workerman\Worker;
 
 class WorkermanEventSubscriber
 {
-    private bool $isWorkerman;
+    private \Closure $workermanChecker;
 
-    public function __construct()
+    public function __construct(?\Closure $workermanChecker = null)
     {
-        $this->isWorkerman = $this->isWorkerman();
+        $this->workermanChecker = $workermanChecker ?? static fn (): bool => Worker::isRunning();
     }
 
     #[AsEventListener]
     public function increaseWorkermanTotalRequest(WorkerMessageHandledEvent $event): void
     {
-        if (!$this->isWorkerman) {
+        if (!$this->isWorkerman()) {
             return;
         }
         ++ConnectionInterface::$statistics['total_request'];
@@ -29,7 +29,7 @@ class WorkermanEventSubscriber
     #[AsEventListener]
     public function increaseWorkermanSendFailCount(WorkerMessageFailedEvent $event): void
     {
-        if (!$this->isWorkerman) {
+        if (!$this->isWorkerman()) {
             return;
         }
         ++ConnectionInterface::$statistics['send_fail'];
@@ -37,6 +37,6 @@ class WorkermanEventSubscriber
 
     private function isWorkerman(): bool
     {
-        return Worker::isRunning();
+        return ($this->workermanChecker)();
     }
 }
