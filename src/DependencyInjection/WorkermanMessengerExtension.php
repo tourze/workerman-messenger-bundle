@@ -7,7 +7,7 @@ use Tourze\SymfonyDependencyServiceLoader\AutoExtension;
 /**
  * @internal
  */
-class WorkermanMessengerExtension extends AutoExtension
+final class WorkermanMessengerExtension extends AutoExtension
 {
     protected function getConfigDir(): string
     {
